@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Button, Image, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
+  const [text, onChangeText] = useState<string>("Default Value")
+
   const [players, setPlayers] = useState([
     { id: 1, name: 'Thibaut Courtois' },
     { id: 2, name: 'Ricardo Carvalho' },
@@ -15,71 +17,72 @@ export default function App() {
     { id: 10, name: 'Eden Hazard' },
     { id: 11, name: 'Antonio Rüdiger' },
   ])
-  const [text, onChangeText] = useState("Useless Text")
+
   return (
-    <ScrollView style={{
-      flex: 1,
-      backgroundColor: '#fff',
-    }}>
-      <View style={styles.container}>
-        <Text style={styles.text}>React <Text style={styles.textSecondary}>Native</Text></Text>
-        <Text>Learn once, write anywhere</Text>
-        <Image source={{ uri: 'https://reactnative.dev/docs/assets/p_cat2.png' }} style={{
-          width: 200,
-          height: 200
-        }} />
+    <View style={styles.container}>
+      <View>
+        <TextInput
+          onChangeText={onChangeText}
+          value={text}
+          autoCapitalize='none'
+          autoCorrect={false}
+          // keyboardType='numeric'
+          // maxLength={2} //textarea
+          // multiline
+          style={{
+            borderColor: "violet",
+            borderWidth: 1,
+            padding: 10
+          }} />
+
+        <Text style={styles.text}>{text}</Text>
       </View>
-      <TextInput style={styles.input}
-        // keyboardType='numeric'
-        // maxLength={6}
-        // multiline
-        autoCorrect={false}
-        autoCapitalize="none"
-        placeholder='Nhập thông tin tìm kiếm'
-        onChangeText={onChangeText}
-        value={text}
+
+      <Button
+        title='Add new'
+        onPress={() => alert("tap me")}
       />
-      <Text style={{ marginVertical: 10 }}>Kết quả tìm kiếm: {text}</Text>
-      <Button title='Thêm mới' onPress={() => alert('Tap me...')} />
-      <View style={{ marginVertical: 10 }}>
-        {
-          players.map((player) => (
-            <View key={player.id} style={{
-              margin: 10,
-              padding: 10,
-              borderWidth: 1,
-              borderColor: '#ccc',
-              borderRadius: 5,
-            }}>
-              <Text>{player.name}</Text>
-            </View>
-          ))
-        }
-      </View>
-    </ScrollView>
+
+      <ScrollView >
+        {players.map(player => {
+          return (
+            <Text key={player.id}
+              style={styles.todo}
+            >
+              {player.name}
+            </Text>
+          )
+        })}
+      </ScrollView>
+    </View>
   );
 }
-
+//css-in-js /styled component
 const styles = StyleSheet.create({
+  todo: {
+    fontSize: 30,
+    backgroundColor: "pink",
+    marginBottom: 20,
+    padding: 15
+  },
+  hoidanit: {
+    color: "green",
+
+  },
+
+  text: {
+    fontSize: 30,
+    color: "red"
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 80
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    fontSize: 60, color: "red",
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    marginTop: 50
+
   },
-  text: {
-    fontSize: 24,
-    color: '#dada'
-  },
-  textSecondary: {
-    color: '#58c4dc'
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    margin: 20,
-    padding: 10
-  }
 });
