@@ -9,18 +9,18 @@ export default function App() {
     }}>
       <ScrollView>
         <View style={styles.container}>
-          <Text>Some text</Text>
-          <Text>Some more text</Text>
+          <Text style={styles.text}>React <Text style={styles.textSecondary}>Native</Text></Text>
+          <Text>Learn once, write anywhere</Text>
           <Image source={{ uri: 'https://reactnative.dev/docs/assets/p_cat2.png' }} style={{
             width: 200,
             height: 200
           }} />
-          <StatusBar style="auto" />
         </View>
         <TextInput style={{
           height: 40,
           borderColor: 'gray',
           borderWidth: 1,
+          margin: 20,
         }}
           defaultValue="You can type in me" />
       </ScrollView>
@@ -36,4 +36,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 80
   },
+  text: {
+    fontSize: 24,
+    color: '#dada'
+  },
+  textSecondary: {
+    color: '#58c4dc'
+  }
 });
