@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Image, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
   const [text, onChangeText] = useState<string>("Default Value")
@@ -42,8 +42,24 @@ export default function App() {
         title='Add new'
         onPress={() => alert("tap me")}
       />
-
-      <ScrollView >
+      <FlatList
+      style={{
+        marginTop: 20,
+        borderColor: "red", borderWidth: 1
+      }}
+        data={players}
+        keyExtractor={(item) => item.id +''}
+        renderItem={({item}) => {
+          return (
+            <Text key={item.id}
+              style={styles.todo}
+            >
+              {item.name}
+            </Text>
+          )
+        }}
+      />
+      {/* <ScrollView >
         {players.map(player => {
           return (
             <Text key={player.id}
@@ -53,7 +69,7 @@ export default function App() {
             </Text>
           )
         })}
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 }
