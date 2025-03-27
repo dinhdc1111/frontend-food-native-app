@@ -7,20 +7,18 @@ type Props = {
 
 const styles = StyleSheet.create({
   todo: {
-    fontSize: 30,
+    fontSize: 14,
     backgroundColor: "pink",
     marginBottom: 20,
-    padding: 15
+    padding: 15,
+    borderRadius: 10,
   },
 })
 const ListTodo = (props: Props) => {
   const { todoList, handleRemoveTodo } = props;
   return (
     <FlatList
-      style={{
-        marginTop: 20,
-        borderColor: "red", borderWidth: 1
-      }}
+      style={{ marginTop: 20}}
       data={todoList}
       keyExtractor={(item) => item.id + ''}
       renderItem={({ item }) => {
