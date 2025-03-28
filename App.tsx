@@ -1,42 +1,47 @@
-import { useState } from 'react';
-import { Keyboard, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import InputTodo from './components/todo/InputTodo';
-import ListTodo from './components/todo/ListTodo';
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Button, Text, View } from "react-native";
 
-export default function App() {
-  const [todoList, setTodoList] = useState<ITodo[]>([])
+const Stack = createNativeStackNavigator();
 
-  function randomInteger(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  const addToDo = (text: string) => {
-    const todoNew = { id: randomInteger(1, 999999999), title: text }
-    setTodoList([...todoList, todoNew])
-  }
-
-  const handleRemoveTodo = (id: number) => {
-    const newTodoList = todoList.filter(todo => todo.id !== id);
-    setTodoList(newTodoList);
-  }
+function HomeScreen() {
+  const navigation: any = useNavigation();
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <InputTodo addToDo={addToDo} />
-        <ListTodo todoList={todoList} handleRemoveTodo={handleRemoveTodo} />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <View style={{ marginVertical: 10 }}>
+        <Button title="Go to Details" onPress={() => navigation.navigate('Details')} />
       </View>
-    </TouchableWithoutFeedback>
+      <View style={{ marginVertical: 10 }}>
+        <Button title="Go to product ID 1" onPress={() => navigation.navigate('Details')} />
+      </View>
+      <View style={{ marginVertical: 10 }}>
+        <Button title="Go to product ID 2" onPress={() => navigation.navigate('Details')} />
+      </View>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    fontSize: 60,
-    color: "red",
-    paddingTop: 20,
-    paddingHorizontal: 20,
-    marginTop: 50
-  },
-});
+function DetailsScreen() {
+  const navigation: any = useNavigation();
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+      <View style={{ marginVertical: 10 }}>
+        <Button title="Go back" onPress={() => navigation.goBack()} />
+      </View>
+      <Text>ID Product = ...</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
