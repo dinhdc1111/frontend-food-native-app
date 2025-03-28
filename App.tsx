@@ -32,8 +32,8 @@ function DetailsScreen() {
       <View style={{ marginVertical: 10 }}>
         <Button title="Go back" onPress={() => navigation.goBack()} />
       </View>
-      <Text>ID: {route.params.userId}</Text>
-      <Text>Tên sản phẩm: {route.params.name}</Text>
+      <Text>ID: {route?.params?.userId}</Text>
+      <Text>Tên sản phẩm: {route?.params?.name}</Text>
     </View>
   );
 }
@@ -41,9 +41,30 @@ function DetailsScreen() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ headerTitle: "Trang chủ" }} />
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={
+            ({ route }: { route: any }) => ({
+              headerTitle: `Chi tiết sản phẩm ${route?.params?.userId ?? ''}`,
+            })
+          }
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
