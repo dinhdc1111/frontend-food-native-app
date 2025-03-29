@@ -5,7 +5,6 @@ const Product = () => {
   return (
     <View>
       <Text>Product Page</Text>
-      <Link href={"/"}>Back Home</Link>
     </View>
   )
 }
