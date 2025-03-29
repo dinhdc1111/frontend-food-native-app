@@ -13,7 +13,7 @@ const AppLayoutRoot = () => {
         },
       }}
     >
-      <Stack.Screen name="index" options={{
+      <Stack.Screen name="(tabs)" options={{
         headerTitle: "Trang chủ"
       }} />
       <Stack.Screen name="product/index" options={{
