@@ -6,8 +6,8 @@ import 'react-native-gesture-handler';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Home from "./src/components/nesting-nav/Home";
 import HomeDetail from "./src/components/nesting-nav/HomeDetail";
-import Like from "./src/components/nesting-nav/Like";
-import LikeDetail from "./src/components/nesting-nav/LikeDetail";
+import Like from "./src/app/like";
+import LikeDetail from "./src/app/like/like-detail";
 import About from "./src/components/nesting-nav/About";
 import ChangePassword from "./src/components/nesting-nav/ChangePassword";
 
