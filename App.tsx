@@ -4,12 +4,12 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import 'react-native-gesture-handler';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import Home from "./components/nesting-nav/Home";
-import HomeDetail from "./components/nesting-nav/HomeDetail";
-import Like from "./components/nesting-nav/Like";
-import LikeDetail from "./components/nesting-nav/LikeDetail";
-import About from "./components/nesting-nav/About";
-import ChangePassword from "./components/nesting-nav/ChangePassword";
+import Home from "./src/components/nesting-nav/Home";
+import HomeDetail from "./src/components/nesting-nav/HomeDetail";
+import Like from "./src/components/nesting-nav/Like";
+import LikeDetail from "./src/components/nesting-nav/LikeDetail";
+import About from "./src/components/nesting-nav/About";
+import ChangePassword from "./src/components/nesting-nav/ChangePassword";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
