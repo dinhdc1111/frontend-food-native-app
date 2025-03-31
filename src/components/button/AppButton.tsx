@@ -1,6 +1,6 @@
 import { Pressable, StyleProp, StyleSheet, Text, TextStyle, View } from "react-native"
-import { APP_COLOR } from "../../utils/constant";
 import { ReactNode } from "react";
+import { APP_COLOR } from "@/utils/constant";
 type Props = {
   title: string,
   onPress: () => void,
@@ -29,13 +29,12 @@ const AppButton = (props: Props) => {
 export default AppButton
 const styles = StyleSheet.create({
   buttonContainer: {
-    borderRadius: 10,
+    borderRadius: 30,
     paddingHorizontal: 15,
     paddingVertical: 10,
     flexDirection: "row",
     gap: 10,
     alignItems: "center",
-    // alignSelf: "flex-start",
     backgroundColor: APP_COLOR.PRIMARY
   }
 })
