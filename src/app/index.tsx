@@ -6,7 +6,7 @@ import backgroundImage from '@/assets/auth/welcome-background.png';
 import facebookIcon from '@/assets/auth/facebook.png';
 import googleIcon from '@/assets/auth/google.png';
 import { LinearGradient } from 'expo-linear-gradient';
-import TextBetweenLine from '@/components/text/TextBetweenLine';
+import TextBetweenLine from '@/shared/components/text/TextBetweenLine';
 import { Link, Redirect } from 'expo-router';
 type Props = {}
 const WelcomePage = (props: Props) => {

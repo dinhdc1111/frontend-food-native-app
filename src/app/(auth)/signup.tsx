@@ -1,6 +1,9 @@
 import AppButton from '@/shared/components/button/AppButton'
+import SocialButton from '@/shared/components/button/SocialButton'
+import AppInput from '@/shared/components/input/AppInput'
 import { APP_COLOR } from '@/shared/constants/colors'
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Link } from 'expo-router'
+import { StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 type Props = {}
 const SignUp = (props: Props) => {
@@ -10,18 +13,9 @@ const SignUp = (props: Props) => {
         <View>
           <Text style={styles.title}>Sign Up</Text>
         </View>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Full name</Text>
-          <TextInput style={styles.input} />
-        </View>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>E-mail</Text>
-          <TextInput style={styles.input} />
-        </View>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Password</Text>
-          <TextInput style={styles.input} />
-        </View>
+        <AppInput title='Full name' />
+        <AppInput keyboardType='email-address' title='E-mail' />
+        <AppInput title='Password' />
         <AppButton
           title='Register'
           onPress={() => alert(1)}
@@ -36,6 +30,25 @@ const SignUp = (props: Props) => {
             maxWidth: 315
           }}
         />
+        <View style={{
+          marginVertical: 15,
+          flexDirection: "row",
+          gap: 10,
+          justifyContent: "center"
+        }}>
+          <Text style={{
+            color: "black",
+          }}>
+            Already have an account?
+          </Text>
+          <Link href={"/(auth)/login"}>
+            <Text style={{ color: "black", textDecorationLine: 'underline' }}>
+              SignIn
+            </Text>
+          </Link>
+
+        </View>
+        <SocialButton />
       </View>
     </SafeAreaView>
   )
@@ -54,19 +67,5 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 37,
     marginVertical: 30
-  },
-  inputGroup: {
-    rowGap: 10,
-  },
-  label: {
-    color: APP_COLOR.SECONDARY_TEXT_COLOR,
-    fontSize: 16,
-    fontWeight: "400",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#d0d0d0",
-    padding: 20,
-    borderRadius: 10,
   },
 })

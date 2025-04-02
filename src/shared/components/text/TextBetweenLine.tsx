@@ -18,7 +18,7 @@ const TextBetweenLine = (props: IProps) => {
       }}>
       </View>
       <Text style={{
-        color: "white",
+        color: "black",
         position: "relative",
         top: 10
       }}>{title}</Text>
@@ -27,7 +27,6 @@ const TextBetweenLine = (props: IProps) => {
         borderBottomWidth: 1,
         paddingHorizontal: 35
       }}>
-
       </View>
     </View>
   )
