@@ -1,6 +1,6 @@
 import { Pressable, StyleProp, StyleSheet, Text, TextStyle, View } from "react-native"
 import { ReactNode } from "react";
-import { APP_COLOR } from "@/utils/constant";
+import { APP_COLOR } from "@/shared/constants/colors";
 type Props = {
   title: string,
   onPress: () => void,
@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 10,
     alignItems: "center",
-    backgroundColor: APP_COLOR.PRIMARY
+    backgroundColor: APP_COLOR.PRIMARY_COLOR
   }
 })

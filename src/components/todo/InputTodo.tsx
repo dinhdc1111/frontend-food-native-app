@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Alert, Button, StyleSheet, TextInput, View } from "react-native"
-import MineButton from "../button/MineButton";
+import MineButton from "../../shared/components/button/MineButton";
 
 const styles = StyleSheet.create({
   todoInput: {

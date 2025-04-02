@@ -1,6 +1,6 @@
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
-import AppButton from 'components/button/AppButton'
-import { APP_COLOR } from 'utils/constant'
+import AppButton from '@/shared/components/button/AppButton'
+import { APP_COLOR } from '@/shared/constants/colors'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import backgroundImage from '@/assets/auth/welcome-background.png';
 import facebookIcon from '@/assets/auth/facebook.png';
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   brand: {
     fontSize: 53,
     fontWeight: '700',
-    color: APP_COLOR.PRIMARY,
+    color: APP_COLOR.PRIMARY_COLOR,
     marginVertical: 5
   },
   description: {
