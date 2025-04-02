@@ -7,8 +7,11 @@ import facebookIcon from '@/assets/auth/facebook.png';
 import googleIcon from '@/assets/auth/google.png';
 import { LinearGradient } from 'expo-linear-gradient';
 import TextBetweenLine from '@/components/text/TextBetweenLine';
+import { Link, Redirect } from 'expo-router';
 type Props = {}
 const WelcomePage = (props: Props) => {
+  // Test screen SignUp
+  if(true) return <Redirect href={"/(auth)/signup"}/>
   return (
     <ImageBackground
       style={{ flex: 1 }}
@@ -78,9 +81,11 @@ const WelcomePage = (props: Props) => {
               }}>
                 Chưa có tài khoản?
               </Text>
-              <Text style={{ color: "white", textDecorationLine: 'underline' }}>
-                Đăng ký.
-              </Text>
+              <Link href={"/(auth)/signup"}>
+                <Text style={{ color: "white", textDecorationLine: 'underline' }}>
+                  Đăng ký.
+                </Text>
+              </Link>
             </View>
           </View>
         </View>
