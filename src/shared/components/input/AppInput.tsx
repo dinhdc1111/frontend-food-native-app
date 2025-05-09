@@ -9,6 +9,7 @@ type Props = {
   value: any;
   setValue(value: any): void;
 };
+
 const AppInput = (props: Props) => {
   const { title, keyboardType, secureTextEntry = false, value, setValue } = props;
   const [isFocus, setIsFocus] = useState<boolean>(false);
