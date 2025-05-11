@@ -2,12 +2,25 @@ import AppButton from "@/shared/components/button/AppButton";
 import SocialButton from "@/shared/components/button/SocialButton";
 import AppInput from "@/shared/components/input/AppInput";
 import { APP_COLOR } from "@/shared/constants/colors";
+import axios from "axios";
 import { Link } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 type Props = {};
 const SignUp = (props: Props) => {
+  const URL_BACKEND = process.env.EXPO_PUBLIC_API_URL
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${URL_BACKEND}`);
+        console.log("res", res.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData()
+  }, [])
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
