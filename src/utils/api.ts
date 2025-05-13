@@ -3,7 +3,7 @@ import instance from "@/utils/axios.customize";
 
 export const registerAPI = (email: string, password: string, name: string) => {
   const url = `${instance}/api/v1/auth/register`;
-  return axios.post(url, {
+  return axios.post<IBackendRes<IRegister>>(url, {
     email,
     password,
     name,

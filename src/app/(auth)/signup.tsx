@@ -18,6 +18,8 @@ const SignUp = (props: Props) => {
       const res = await registerAPI(email, password, name);
       if(res.data){
         router.navigate("/(auth)/verify");
+      }else{
+        alert(res.message);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
