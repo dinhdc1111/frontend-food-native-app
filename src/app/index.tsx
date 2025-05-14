@@ -10,7 +10,7 @@ import { Link, Redirect } from 'expo-router';
 type Props = {}
 const WelcomePage = (props: Props) => {
   // Test screen SignUp
-  if(true) return <Redirect href={"/(auth)/signup"}/>
+  // if(true) return <Redirect href={"/(auth)/signup"}/>
   return (
     <ImageBackground
       style={{ flex: 1 }}

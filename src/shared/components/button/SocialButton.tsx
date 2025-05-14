@@ -7,7 +7,7 @@ type Props = {}
 const SocialButton = (props: Props) => {
   return (
     <View style={styles.welcomeGroupButton}>
-      <TextBetweenLine title='Đăng nhập với' />
+      <TextBetweenLine title='Đăng nhập với' textColor='black' />
       <View style={{
         flexDirection: "row",
         justifyContent: "center",
