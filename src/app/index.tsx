@@ -1,7 +1,6 @@
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
 import AppButton from '@/shared/components/button/AppButton'
 import { APP_COLOR } from '@/shared/constants/colors'
-import Ionicons from '@expo/vector-icons/Ionicons';
 import backgroundImage from '@/assets/auth/welcome-background.png';
 import facebookIcon from '@/assets/auth/facebook.png';
 import googleIcon from '@/assets/auth/google.png';
@@ -11,7 +10,7 @@ import { Link, Redirect } from 'expo-router';
 type Props = {}
 const WelcomePage = (props: Props) => {
   // Test screen SignUp
-  if(true) return <Redirect href={"/(auth)/signup"}/>
+  if(true) return <Redirect href={"/(auth)/verify"}/>
   return (
     <ImageBackground
       style={{ flex: 1 }}

@@ -7,8 +7,9 @@ import { Link, router } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Toast from "react-native-root-toast";
-import { SafeAreaView } from "react-native-safe-area-context";
+
 type Props = {};
+
 const SignUp = (props: Props) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -34,7 +35,6 @@ const SignUp = (props: Props) => {
     }
   };
   return (
-    <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View>
           <Text style={styles.title}>Đăng ký</Text>
@@ -77,14 +77,10 @@ const SignUp = (props: Props) => {
         </View>
         <SocialButton />
       </View>
-    </SafeAreaView>
   );
 };
 export default SignUp;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   content: {
     flex: 1,
     marginHorizontal: 26,
