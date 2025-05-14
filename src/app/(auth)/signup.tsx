@@ -18,7 +18,8 @@ const SignUp = (props: Props) => {
     try {
       const res = await registerAPI(email, password, name);
       if (res.data) {
-        router.navigate({
+        // Use replace to prevent going back to the sign-up page
+        router.replace({
           pathname: "/(auth)/verify",
           params: {
             email: email,

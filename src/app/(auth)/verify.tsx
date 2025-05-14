@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import OTPTextView from "react-native-otp-textinput";
 import { APP_COLOR } from "@/shared/constants/colors";
 import LoadingOverlay from "@/shared/components/loading/LoadingOverlay";
-import { verifyCodeAPI } from "@/utils/api";
+import { resendCodeAPI, verifyCodeAPI } from "@/utils/api";
 import Toast from "react-native-root-toast";
 import { router, useLocalSearchParams } from "expo-router";
 
@@ -14,15 +14,15 @@ const Verify = (props: VerifyProps) => {
   const otpInput = useRef<OTPTextView>(null);
   const [code, setCode] = useState<string>("");
   const { email } = useLocalSearchParams();
-  const handleResendCode = async () => {
-    // Call API to resend code
+
+  const handleVerifyCode = async () => {
+    // Call API to verify code
     setIsSubmit(true);
     Keyboard.dismiss();
     const res = await verifyCodeAPI(email as string, code);
     setIsSubmit(false);
     if (res.data) {
       // Handle success
-      // Clear the OTP input
       otpInput?.current?.clear();
       Toast.show("Kích hoạt tài khoản thành công", {
         duration: Toast.durations.LONG,
@@ -32,7 +32,8 @@ const Verify = (props: VerifyProps) => {
         opacity: 1,
         shadow: true,
       });
-      router.navigate("/(auth)/login");
+      // Use replace to prevent going back to the verify page
+      router.replace("/(auth)/login");
     } else {
       // Handle error
       Toast.show(res.message as string, {
@@ -47,9 +48,23 @@ const Verify = (props: VerifyProps) => {
   };
   useEffect(() => {
     if (code && code.length === 6) {
-      handleResendCode();
+      handleVerifyCode();
     }
   }, [code]);
+
+  const handleResendCode = async () => {
+    otpInput?.current?.clear();
+    const res = await resendCodeAPI(email as string);
+    const message = res.data ? "Gửi mã xác thực thành công" : res.message;
+    Toast.show(message as string, {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.BOTTOM,
+      textColor: "#fff",
+      backgroundColor: APP_COLOR.PRIMARY_COLOR,
+      opacity: 1,
+      shadow: true,
+    });
+  };
   return (
     <>
       <View style={styles.container}>
@@ -77,7 +92,9 @@ const Verify = (props: VerifyProps) => {
         </View>
         <View style={{ marginVertical: 20, flexDirection: "row" }}>
           <Text>Không nhận được mã xác thực, </Text>
-          <Text style={{ color: APP_COLOR.PRIMARY_COLOR, textDecorationLine: "underline" }}>Gửi lại mã xác thực</Text>
+          <Text onPress={handleResendCode} style={{ color: APP_COLOR.PRIMARY_COLOR, textDecorationLine: "underline" }}>
+            Gửi lại mã xác thực
+          </Text>
         </View>
       </View>
       {isSubmit && <LoadingOverlay />}
