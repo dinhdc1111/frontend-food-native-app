@@ -1,37 +1,87 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, Keyboard } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
 import OTPTextView from "react-native-otp-textinput";
 import { APP_COLOR } from "@/shared/constants/colors";
+import LoadingOverlay from "@/shared/components/loading/LoadingOverlay";
+import { verifyCodeAPI } from "@/utils/api";
+import Toast from "react-native-root-toast";
+import { router, useLocalSearchParams } from "expo-router";
 
 type VerifyProps = {};
 
 const Verify = (props: VerifyProps) => {
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const otpInput = useRef<OTPTextView>(null);
+  const [code, setCode] = useState<string>("");
+  const { email } = useLocalSearchParams();
+  const handleResendCode = async () => {
+    // Call API to resend code
+    setIsSubmit(true);
+    Keyboard.dismiss();
+    const res = await verifyCodeAPI(email as string, code);
+    setIsSubmit(false);
+    if (res.data) {
+      // Handle success
+      // Clear the OTP input
+      otpInput?.current?.clear();
+      Toast.show("Kích hoạt tài khoản thành công", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        textColor: "#fff",
+        backgroundColor: APP_COLOR.PRIMARY_COLOR,
+        opacity: 1,
+        shadow: true,
+      });
+      router.navigate("/(auth)/login");
+    } else {
+      // Handle error
+      Toast.show(res.message as string, {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        textColor: "#fff",
+        backgroundColor: APP_COLOR.PRIMARY_COLOR,
+        opacity: 1,
+        shadow: true,
+      });
+    }
+  };
+  useEffect(() => {
+    if (code && code.length === 6) {
+      handleResendCode();
+    }
+  }, [code]);
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Xác thực tài khoản</Text>
-      <Text style={styles.subheading}>
-        Vui lòng nhập mã xác thực được gửi tới địa chỉ email: nguyenvana@example.com
-      </Text>
-      <View style={{ marginVertical: 20 }}>
-        <OTPTextView
-          inputCount={6}
-          inputCellLength={1}
-          tintColor={APP_COLOR.PRIMARY_COLOR}
-          textInputStyle={{
-            borderWidth: 1,
-            borderColor: APP_COLOR.PRIMARY_COLOR,
-            borderBottomWidth: 1,
-            borderRadius: 5,
-            // @ts-ignore: next-line
-            color: APP_COLOR.PRIMARY_COLOR,
-          }}
-        />
+    <>
+      <View style={styles.container}>
+        <Text style={styles.heading}>Xác thực tài khoản</Text>
+        <Text style={styles.subheading}>
+          Vui lòng nhập mã xác thực được gửi tới địa chỉ email: nguyenvana@example.com
+        </Text>
+        <View style={{ marginVertical: 20 }}>
+          <OTPTextView
+            ref={otpInput}
+            handleTextChange={setCode}
+            inputCount={6}
+            inputCellLength={1}
+            tintColor={APP_COLOR.PRIMARY_COLOR}
+            autoFocus
+            textInputStyle={{
+              borderWidth: 1,
+              borderColor: APP_COLOR.PRIMARY_COLOR,
+              borderBottomWidth: 1,
+              borderRadius: 5,
+              // @ts-ignore: next-line
+              color: APP_COLOR.PRIMARY_COLOR,
+            }}
+          />
+        </View>
+        <View style={{ marginVertical: 20, flexDirection: "row" }}>
+          <Text>Không nhận được mã xác thực, </Text>
+          <Text style={{ color: APP_COLOR.PRIMARY_COLOR, textDecorationLine: "underline" }}>Gửi lại mã xác thực</Text>
+        </View>
       </View>
-      <View style={{ marginVertical: 20, flexDirection: "row" }}>
-        <Text>Không nhận được mã xác thực, </Text>
-        <Text style={{ color: APP_COLOR.PRIMARY_COLOR, textDecorationLine: "underline" }}>Gửi lại mã xác thực</Text>
-      </View>
-    </View>
+      {isSubmit && <LoadingOverlay />}
+    </>
   );
 };
 

@@ -17,9 +17,14 @@ const SignUp = (props: Props) => {
   const handleSignUp = async () => {
     try {
       const res = await registerAPI(email, password, name);
-      if(res.data){
-        router.navigate("/(auth)/verify");
-      }else{
+      if (res.data) {
+        router.navigate({
+          pathname: "/(auth)/verify",
+          params: {
+            email: email,
+          },
+        });
+      } else {
         const message = Array.isArray(res.message) ? res.message[0] : res.message;
         Toast.show(message, {
           duration: Toast.durations.LONG,
@@ -28,55 +33,55 @@ const SignUp = (props: Props) => {
           backgroundColor: APP_COLOR.PRIMARY_COLOR,
           opacity: 1,
           shadow: true,
-        })
+        });
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
   return (
-      <View style={styles.content}>
-        <View>
-          <Text style={styles.title}>Đăng ký</Text>
-        </View>
-        <AppInput title="Họ tên" value={name} setValue={setName} />
-        <AppInput keyboardType="email-address" title="Email" value={email} setValue={setEmail} />
-        <AppInput title="Mật khẩu" secureTextEntry={true} value={password} setValue={setPassword} />
-        <AppButton
-          title="Đăng ký"
-          onPress={handleSignUp}
-          textStyle={{ color: "#fff", paddingVertical: 5, textTransform: "uppercase" }}
-          pressStyle={{ alignSelf: "stretch" }}
-          btnStyle={{
-            backgroundColor: APP_COLOR.PRIMARY_COLOR,
-            justifyContent: "center",
-            paddingHorizontal: 22,
-            marginHorizontal: 40,
-            marginTop: 30,
-            maxWidth: 315,
-          }}
-        />
-        <View
+    <View style={styles.content}>
+      <View>
+        <Text style={styles.title}>Đăng ký</Text>
+      </View>
+      <AppInput title="Họ tên" value={name} setValue={setName} />
+      <AppInput keyboardType="email-address" title="Email" value={email} setValue={setEmail} />
+      <AppInput title="Mật khẩu" secureTextEntry={true} value={password} setValue={setPassword} />
+      <AppButton
+        title="Đăng ký"
+        onPress={handleSignUp}
+        textStyle={{ color: "#fff", paddingVertical: 5, textTransform: "uppercase" }}
+        pressStyle={{ alignSelf: "stretch" }}
+        btnStyle={{
+          backgroundColor: APP_COLOR.PRIMARY_COLOR,
+          justifyContent: "center",
+          paddingHorizontal: 22,
+          marginHorizontal: 40,
+          marginTop: 30,
+          maxWidth: 315,
+        }}
+      />
+      <View
+        style={{
+          marginVertical: 15,
+          flexDirection: "row",
+          gap: 5,
+          justifyContent: "center",
+        }}
+      >
+        <Text
           style={{
-            marginVertical: 15,
-            flexDirection: "row",
-            gap: 5,
-            justifyContent: "center",
+            color: "black",
           }}
         >
-          <Text
-            style={{
-              color: "black",
-            }}
-          >
-            Bạn đã có tài khoản?
-          </Text>
-          <Link href={"/(auth)/login"}>
-            <Text style={{ color: "#002c8c" }}>Đăng nhập ngay</Text>
-          </Link>
-        </View>
-        <SocialButton />
+          Bạn đã có tài khoản?
+        </Text>
+        <Link href={"/(auth)/login"}>
+          <Text style={{ color: "#002c8c" }}>Đăng nhập ngay</Text>
+        </Link>
       </View>
+      <SocialButton />
+    </View>
   );
 };
 export default SignUp;
