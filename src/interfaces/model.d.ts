@@ -14,4 +14,9 @@ declare global {
   interface IRegister {
     _id: string;
   }
+
+  interface ILogin {
+    user: object;
+    access_token: string;
+  }
 }

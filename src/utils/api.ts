@@ -23,3 +23,11 @@ export const resendCodeAPI = (email: string) => {
     email,
   });
 };
+
+export const loginAPI = (username: string, password: string) => {
+  const url = `/api/v1/auth/login`;
+  return instance.post<IBackendRes<ILogin>>(url, {
+    username,
+    password,
+  });
+};

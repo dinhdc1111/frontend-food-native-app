@@ -13,7 +13,7 @@ const Verify = (props: VerifyProps) => {
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const otpInput = useRef<OTPTextView>(null);
   const [code, setCode] = useState<string>("");
-  const { email } = useLocalSearchParams();
+  const { email, isLogin } = useLocalSearchParams();
 
   const handleVerifyCode = async () => {
     // Call API to verify code
@@ -32,8 +32,12 @@ const Verify = (props: VerifyProps) => {
         opacity: 1,
         shadow: true,
       });
-      // Use replace to prevent going back to the verify page
-      router.replace("/(auth)/login");
+      if (isLogin) {
+        router.replace({ pathname: "/(tabs)" });
+      } else {
+        // Use replace to prevent going back to the verify page
+        router.replace("/(auth)/login");
+      }
     } else {
       // Handle error
       Toast.show(res.message as string, {
