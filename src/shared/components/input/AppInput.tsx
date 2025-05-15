@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: "#d0d0d0",
-    paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
     borderRadius: 10,
   },
   showPassword: {

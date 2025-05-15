@@ -30,6 +30,12 @@ const AppLayoutRoot = () => {
             }}
           />
           <Stack.Screen
+            name="(auth)/login"
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
             name="(auth)/verify"
             options={{
               headerShown: false,
@@ -45,12 +51,6 @@ const AppLayoutRoot = () => {
             name="product/index"
             options={{
               headerTitle: "Sản phẩm",
-            }}
-          />
-          <Stack.Screen
-            name="(auth)/login"
-            options={{
-              headerTitle: "Đăng nhập",
             }}
           />
         </Stack>

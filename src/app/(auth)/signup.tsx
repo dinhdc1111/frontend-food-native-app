@@ -81,7 +81,7 @@ const SignUp = (props: Props) => {
           <Text style={{ color: "#002c8c" }}>Đăng nhập ngay</Text>
         </Link>
       </View>
-      <SocialButton />
+      <SocialButton title="Đăng ký với"/>
     </View>
   );
 };

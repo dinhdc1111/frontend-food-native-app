@@ -6,7 +6,7 @@ import facebookIcon from '@/assets/auth/facebook.png';
 import googleIcon from '@/assets/auth/google.png';
 import { LinearGradient } from 'expo-linear-gradient';
 import TextBetweenLine from '@/shared/components/text/TextBetweenLine';
-import { Link, Redirect } from 'expo-router';
+import { Link, Redirect, router } from 'expo-router';
 type Props = {}
 const WelcomePage = (props: Props) => {
   // Test screen SignUp
@@ -56,7 +56,7 @@ const WelcomePage = (props: Props) => {
             <View>
               <AppButton
                 title='Start with your email'
-                onPress={() => alert(1)}
+                onPress={() => router.navigate("/(auth)/login")}
                 textStyle={{ color: "#fff", paddingVertical: 5 }}
                 pressStyle={{ alignSelf: "stretch" }}
                 btnStyle={{
