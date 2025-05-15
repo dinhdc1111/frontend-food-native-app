@@ -13,8 +13,11 @@ type Props = {};
 const Login = (props: Props) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleSignUp = async () => {
     try {
+      setLoading(true);
       const res = await loginAPI(username, password);
       if (res.data) {
         // Use replace to prevent going back to the sign-up page
@@ -50,6 +53,8 @@ const Login = (props: Props) => {
       }
     } catch (error) {
       console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -61,6 +66,7 @@ const Login = (props: Props) => {
       <AppInput title="Mật khẩu" secureTextEntry={true} value={password} setValue={setPassword} />
       <Text style={{ color: APP_COLOR.PRIMARY_COLOR, textAlign: "center", paddingTop: 20 }}>Quên mật khẩu?</Text>
       <AppButton
+        loading={loading}
         title="Đăng nhập"
         onPress={handleSignUp}
         textStyle={{ color: "#fff", paddingVertical: 5, textTransform: "uppercase" }}

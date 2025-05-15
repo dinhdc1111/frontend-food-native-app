@@ -1,6 +1,7 @@
 export const APP_COLOR = {
     PRIMARY_COLOR: "#ee3a24",
     SECONDARY_TEXT_COLOR: "#9796A1",
+    WHITE_COLOR: "#FFFFFF",
 
     BORDER_BUTTON_DEFAULT: "#d0d0d0",
     BORDER_BUTTON_ACTIVE: "#ee3a24",
