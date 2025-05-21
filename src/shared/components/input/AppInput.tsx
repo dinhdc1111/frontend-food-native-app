@@ -26,7 +26,7 @@ const AppInput = (props: Props) => {
           onChangeText={onChangeText}
           onFocus={() => setIsFocus(true)}
           onBlur={(e) => {
-            onBlur(e);
+            if (onBlur) onBlur(e);
             setIsFocus(false);
           }}
           keyboardType={keyboardType}
@@ -39,11 +39,7 @@ const AppInput = (props: Props) => {
           selectionColor={APP_COLOR.PRIMARY_COLOR}
           secureTextEntry={secureTextEntry && !isShowPassword}
         />
-        {errors && (
-          <Text style={{ color: APP_COLOR.ERROR_COLOR, fontSize: 12, marginTop: 5 }}>
-            {errors}
-          </Text>
-        )}
+        {errors && <Text style={{ color: APP_COLOR.ERROR_COLOR, fontSize: 12, marginTop: 5 }}>{errors}</Text>}
         {secureTextEntry && (
           <FontAwesome
             name={isShowPassword ? "eye-slash" : "eye"}
