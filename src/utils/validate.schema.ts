@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
 export const LoginSchema = Yup.object().shape({
-  password: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
+  email: Yup.string().email("Email không đúng định dạng").required("Email là bắt buộc"),
+  password: Yup.string().min(6, "Mật khẩu quá ngắn").max(50, "Mật khẩu quá dài").required("Mật khẩu là bắt buộc"),
 });

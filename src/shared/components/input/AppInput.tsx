@@ -7,11 +7,14 @@ type Props = {
   keyboardType?: KeyboardTypeOptions;
   secureTextEntry?: boolean;
   value: any;
-  setValue(value: any): void;
+  setValue?: (value: any) => void;
+  onChangeText?: any;
+  onBlur?: any;
+  errors?: any;
 };
 
 const AppInput = (props: Props) => {
-  const { title, keyboardType, secureTextEntry = false, value, setValue } = props;
+  const { title, keyboardType, secureTextEntry = false, value, setValue, onChangeText, onBlur, errors } = props;
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   return (
@@ -20,9 +23,12 @@ const AppInput = (props: Props) => {
       <View>
         <TextInput
           value={value}
-          onChangeText={(text) => setValue(text)}
+          onChangeText={onChangeText}
           onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
+          onBlur={(e) => {
+            onBlur(e);
+            setIsFocus(false);
+          }}
           keyboardType={keyboardType}
           style={[
             styles.input,
@@ -33,6 +39,11 @@ const AppInput = (props: Props) => {
           selectionColor={APP_COLOR.PRIMARY_COLOR}
           secureTextEntry={secureTextEntry && !isShowPassword}
         />
+        {errors && (
+          <Text style={{ color: APP_COLOR.ERROR_COLOR, fontSize: 12, marginTop: 5 }}>
+            {errors}
+          </Text>
+        )}
         {secureTextEntry && (
           <FontAwesome
             name={isShowPassword ? "eye-slash" : "eye"}
